@@ -66,7 +66,7 @@ public class TestCupomFiscal {
 			"IE: 123456789" + BREAK;
 
 	@BeforeAll
-	public void setup() {
+	public static void setup() {
 		CupomFiscal.NOME_LOJA = "Loja 1";
 		CupomFiscal.LOGRADOURO = "Log 1";
 		CupomFiscal.NUMERO = 10;
@@ -90,21 +90,21 @@ public class TestCupomFiscal {
 	public void nomeVazio() {
 		CupomFiscal.NOME_LOJA = "";
 		verificarCampoObrigatorio("O campo nome da loja é obrigatório");
-		CupomFiscal.NOME_LOJA = "Arcos Dourados Com. de Alimentos LTDA";
+		CupomFiscal.NOME_LOJA = "Loja 1";
 	}
 
 	@Test
 	public void logradouroVazio() {
 		CupomFiscal.LOGRADOURO = "";
 		verificarCampoObrigatorio("O campo logradouro do endereço é obrigatório");
-		CupomFiscal.LOGRADOURO = "Av. Projetada Leste";
+		CupomFiscal.LOGRADOURO = "Log 1";
 	}
 
 	@Test
 	public void numeroZero() {
 		CupomFiscal.NUMERO = 0;
 		rodarTestarRetorno(TEXTO_ESPERADO_SEM_NUMERO);
-		CupomFiscal.NUMERO = 500;
+		CupomFiscal.NUMERO = 10;
 	}
 
 	@Test
@@ -125,14 +125,14 @@ public class TestCupomFiscal {
 	public void municipioVazio() {
 		CupomFiscal.MUNICIPIO = "";
 		verificarCampoObrigatorio("O campo município do endereço é obrigatório");
-		CupomFiscal.MUNICIPIO = "Campinas";
+		CupomFiscal.MUNICIPIO = "Mun 1";
 	}
 
 	@Test
 	public void estadoVazio() {
 		CupomFiscal.ESTADO = "";
 		verificarCampoObrigatorio("O campo estado do endereço é obrigatório");
-	    CupomFiscal.ESTADO = "SP";
+	    CupomFiscal.ESTADO = "E1";
 	}
 
 	@Test
@@ -160,34 +160,38 @@ public class TestCupomFiscal {
 	public void cnpjVazio() {
 		CupomFiscal.CNPJ = "";
 		verificarCampoObrigatorio("O campo CNPJ da loja é obrigatório");
-	    CupomFiscal.CNPJ = "42.591.651/0797-34";
+	    CupomFiscal.CNPJ = "11.111.111/1111-11";
 	}
 
 	@Test
 	public void inscricaoEstadualVazia() {
 		CupomFiscal.INSCRICAO_ESTADUAL = "";
 		verificarCampoObrigatorio("O campo inscrição estadual da loja é obrigatório");
-		CupomFiscal.INSCRICAO_ESTADUAL = "244.898.500.113";
+		CupomFiscal.INSCRICAO_ESTADUAL = "123456789";
 	}
 	
 	@Test
 	public void exercicio02_Customizado() {
-		//Defina seus próprios valores para as variáveis a seguir 
-		CupomFiscal.NOME_LOJA = "";
-		CupomFiscal.LOGRADOURO = "";
-		CupomFiscal.NUMERO = 0;
+		CupomFiscal.NOME_LOJA = "Tropical";
+		CupomFiscal.LOGRADOURO = "Rua siqueira Campos";
+		CupomFiscal.NUMERO = 580;
 		CupomFiscal.COMPLEMENTO = "";
-		CupomFiscal.BAIRRO = "";
-		CupomFiscal.MUNICIPIO = "";
-		CupomFiscal.ESTADO = "";
-		CupomFiscal.CEP = "";
-		CupomFiscal.TELEFONE = "";
+		CupomFiscal.BAIRRO = "Centro";
+		CupomFiscal.MUNICIPIO = "Paulista";
+		CupomFiscal.ESTADO = "Pernambuco";
+		CupomFiscal.CEP = "53401-320";
+		CupomFiscal.TELEFONE = "(81) 3438-5714";
 		CupomFiscal.OBSERVACAO = "";
-		CupomFiscal.CNPJ = "";
-		CupomFiscal.INSCRICAO_ESTADUAL = "";
-		
-		//E atualize o texto esperado abaixo
-		rodarTestarRetorno("" + BREAK);
+		CupomFiscal.CNPJ = "37.886.772/0001-82";
+		CupomFiscal.INSCRICAO_ESTADUAL = "4232303-79";		
+
+		rodarTestarRetorno("Tropical" + BREAK + 
+		"Rua siqueira Campos, 580" + BREAK + 
+		"Centro - Paulista - Pernambuco" + BREAK + 
+		"CEP:53401-320 Tel (81) 3438-5714" + BREAK + 
+		"" + BREAK + 
+		"CNPJ: 37.886.772/0001-82" + BREAK + 
+		"IE: 4232303-79" + BREAK);
 	}
 
 	private void rodarTestarRetorno(String expected) {

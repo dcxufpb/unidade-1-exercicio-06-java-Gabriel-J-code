@@ -15,9 +15,71 @@ public class CupomFiscal {
 	public static String CNPJ = "42.591.651/0797-34";
 	public static String INSCRICAO_ESTADUAL = "244.898.500.113";
 
-	public static String dadosLoja() {
-		//Implemente aqui
-		return null;
+	public static String dadosLoja() throws RuntimeException {
+		if (NOME_LOJA == "") {
+			throw new RuntimeException("O campo nome da loja é obrigatório");			
+		}
+		if (LOGRADOURO == ""){
+			throw new RuntimeException("O campo logradouro do endereço é obrigatório");
+		}		
+		if (MUNICIPIO == ""){
+			throw new RuntimeException("O campo município do endereço é obrigatório");
+		}
+		if (ESTADO == ""){
+			throw new RuntimeException("O campo estado do endereço é obrigatório");
+		} 
+		if (CNPJ == ""){
+			throw new RuntimeException("O campo CNPJ da loja é obrigatório");
+		} 
+		if (INSCRICAO_ESTADUAL == ""){
+			throw new RuntimeException("O campo inscrição estadual da loja é obrigatório");
+		}
+
+		String _NUMERO = "s/n";
+		if (NUMERO > 0){
+			_NUMERO = Integer.toString(NUMERO);
+		}
+		
+		String _COMPLEMENTO = "";
+		if (COMPLEMENTO != ""){
+			_COMPLEMENTO = " " + COMPLEMENTO;
+		}
+	
+		String _BAIRRO = "";
+		if(BAIRRO != ""){
+			_BAIRRO = BAIRRO + " - " ;
+		}
+	
+		String _CEP = "";
+		if(CEP != ""){
+			_CEP = "CEP:" + CEP;
+		}
+		
+		String _TELEFONE = "";
+		if(TELEFONE != ""){
+			_TELEFONE = "Tel " + TELEFONE;
+
+			if(CEP != ""){
+				_TELEFONE = " " + _TELEFONE;
+			}
+		}		
+	
+		String _OBSERVACAO = "";
+		if (OBSERVACAO != ""){
+			_OBSERVACAO = OBSERVACAO;
+		}
+
+		String BREAK = System.lineSeparator();
+
+		String nota = String.format("%s",NOME_LOJA) + BREAK;
+		nota += String.format("%s, %s%s",LOGRADOURO,_NUMERO,_COMPLEMENTO) + BREAK;
+		nota += String.format("%s%s - %s",_BAIRRO,MUNICIPIO,ESTADO) + BREAK;
+		nota += String.format("%s%s",_CEP,_TELEFONE) + BREAK;
+		nota += String.format("%s",_OBSERVACAO) + BREAK;
+		nota += String.format("CNPJ: %s",CNPJ) + BREAK;
+		nota += String.format("IE: %s",INSCRICAO_ESTADUAL) + BREAK;
+	
+		return nota;
 	}
 
 }
